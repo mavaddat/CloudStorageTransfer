@@ -462,6 +462,7 @@ def main():
     test_retrieve_inventory()
     test_retrieve_inventory_results()
     test_upload_archive()
+    test_backup_and_restore()
 
 
 if __name__ == '__main__':

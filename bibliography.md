@@ -24,5 +24,6 @@
 * [Mega.nz Python SDK](https://github.com/odwyersoftware/mega.py)
 * [OneDrive Python SDK](https://github.com/OneDrive/onedrive-sdk-python)
 * [Google Cloud Platform Python SDK](https://cloud.google.com/storage/docs/reference/libraries#client-libraries-usage-python)
-  * [Python Client for Google Cloud Storage](https://googleapis.dev/python/storage/latest/index.html)
+  * [googleapis Python Client for Google Cloud Storage](https://googleapis.dev/python/storage/latest/index.html)
+  * [Github Repo of Python Client for Google Cloud Storage](https://github.com/googleapis/python-storage)
   * [Example shows how to use the client library](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/storage/cloud-client/storage_create_bucket_class_location.py)

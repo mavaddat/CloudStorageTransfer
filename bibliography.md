@@ -2,12 +2,12 @@
 
 * [Dropbox Python SDK](https://github.com/dropbox/dropbox-sdk-python)
   * **OAuth**
-  * [Commandline OAuth Basic](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/oauth/commandline-oauth.py) - Shows a simple example of commandline oauth (no redirect).
-  * [Commandline OAuth Scopes](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/oauth/commandline-oauth-scopes.py) - Shows a simple example of commandline oauth using scopes.
-  * [Commandline OAuth PKCE](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/oauth/commandline-oauth-pkce.py) - Shows a simple example of commandline oauth using PKCE.
+    * [Commandline OAuth Basic](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/oauth/commandline-oauth.py) - Shows a simple example of commandline oauth (no redirect).
+    * [Commandline OAuth Scopes](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/oauth/commandline-oauth-scopes.py) - Shows a simple example of commandline oauth using scopes.
+    * [Commandline OAuth PKCE](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/oauth/commandline-oauth-pkce.py) - Shows a simple example of commandline oauth using PKCE.
   * **Other Examples**
-  * [Updown](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/updown.py) - Sample application that uploads the contents of your `Downloads` folder to Dropbox.
-  * [Backup and Restore](https://github.com/dropbox/dropbox-sdk-python/tree/master/example/back-up-and-restore) - Sample application that shows how you can backup a file and restore previous versions if the file was modified/corrupted in any way.
+    * [Updown](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/updown.py) - Sample application that uploads the contents of your `Downloads` folder to Dropbox.
+    * [Backup and Restore](https://github.com/dropbox/dropbox-sdk-python/tree/master/example/back-up-and-restore) - Sample application that shows how you can backup a file and restore previous versions if the file was modified/corrupted in any way.
 * [AWS Python SDK](https://aws.amazon.com/sdk-for-python/)
   * [AWS Python Logging](https://docs.aws.amazon.com/lambda/latest/dg/python-logging.html)
   * [AWS Python Boto3 Quickstart](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html)

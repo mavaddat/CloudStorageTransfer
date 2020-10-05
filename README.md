@@ -26,3 +26,7 @@ Soon to be Supported Providers:
 - box.com
 - SugarSync
 - MediaFire
+
+## Documentation Resources
+
+[Detailed bibliography](bibliography.md)

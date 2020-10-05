@@ -1,0 +1,51 @@
+include pyproject.toml
+include python-package.yml
+
+# Exclude GitHub pages _config
+exclude _config.yml
+
+# Include the README
+include *.md
+
+# Include the license file
+include LICENSE
+include LICENCE
+
+# Include the data files
+recursive-include data *
+
+# added by check_manifest.py
+include *.gif
+include *.png
+include *.svg
+include tox.ini
+recursive-include discordpy *.APACHE
+recursive-include discordpy *.BSD
+recursive-include discordpy *.PSF
+recursive-include discordpy *.bat
+recursive-include discordpy *.c
+recursive-include discordpy *.cfg
+recursive-include discordpy *.dll
+recursive-include discordpy *.exe
+recursive-include discordpy *.h
+recursive-include discordpy *.json
+recursive-include discordpy *.md
+recursive-include discordpy *.pem
+recursive-include discordpy *.ps1
+recursive-include discordpy *.pxd
+recursive-include discordpy *.pxi
+recursive-include discordpy *.py
+recursive-include discordpy *.pyc
+recursive-include discordpy *.pyd
+recursive-include discordpy *.pyi
+recursive-include discordpy *.pyx
+recursive-include discordpy *.rst
+recursive-include discordpy *.sh
+recursive-include discordpy *.tab
+recursive-include discordpy *.tmpl
+recursive-include discordpy *.txt
+recursive-include discordpy *.typed
+recursive-include discordpy *.xml
+recursive-include discordpy *.zi
+recursive-include src *.dat
+recursive-include tests *.py

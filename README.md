@@ -11,7 +11,7 @@ This project is a work-in-progress. 👷🏽‍♀️👷🏽‍♂️🚧
 
 Currently Supported Providers:
 
-- None
+- Under development
 
 ### Soon
 

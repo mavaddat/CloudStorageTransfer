@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 from os import path
 
 here = path.abspath(path.dirname(__file__))
-issues = 'https://github.com/mavaddat-javid-education/discordpy/issues'
+issues = 'https://github.com/mavaddat/CloudStorageTransfer/issues'
 
 # Get the long description from the README file
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -31,7 +31,7 @@ setup(
     # There are some restrictions on what makes a valid project name
     # specification here:
     # https://packaging.python.org/specifications/core-metadata/#name
-    name='discordbot',  # Required
+    name='CloudStorageTransfer',  # Required
 
     # Versions should comply with PEP 440:
     # https://www.python.org/dev/peps/pep-0440/
@@ -44,7 +44,7 @@ setup(
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#summary
-    description='A Discord bot in Python',  # Optional
+    description='A Cloud Storage Transfer in Python',  # Optional
 
     # This is an optional longer description of your project that represents
     # the body of text which users will see when they visit PyPI.
@@ -203,6 +203,6 @@ setup(
         'Bug Reports': issues,
         'Funding': 'https://www.patreon.com/mavaddat?fan_landing=true',
         'Say Thanks!': 'https://saythanks.io/to/javid%40mavaddat.ca',
-        'Source': 'https://github.com/mavaddat-javid-education/discordpy',
+        'Source': 'https://github.com/mavaddat/CloudStorageTransfer',
     },
 )

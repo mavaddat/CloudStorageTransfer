@@ -11,7 +11,10 @@ This project is a work-in-progress. 👷🏽‍♀️👷🏽‍♂️🚧
 
 Currently Supported Providers:
 
-- Under development
+- Under development ⛏
+  - Dropbox
+  - AWS S3
+    - Glacier
 
 ### Soon
 

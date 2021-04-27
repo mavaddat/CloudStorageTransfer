@@ -2,6 +2,7 @@
 
 * [Dropbox Python SDK](https://github.com/dropbox/dropbox-sdk-python)
   * **OAuth**
+    * [Generate an access token for your own account// By Steve Marx • May 23, 2014](https://dropbox.tech/developers/generate-an-access-token-for-your-own-account)
     * [Commandline OAuth Basic](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/oauth/commandline-oauth.py) - Shows a simple example of commandline oauth (no redirect).
     * [Commandline OAuth Scopes](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/oauth/commandline-oauth-scopes.py) - Shows a simple example of commandline oauth using scopes.
     * [Commandline OAuth PKCE](https://github.com/dropbox/dropbox-sdk-python/blob/master/example/oauth/commandline-oauth-pkce.py) - Shows a simple example of commandline oauth using PKCE.

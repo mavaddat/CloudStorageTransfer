@@ -32,4 +32,4 @@ Soon to be Supported Providers:
 
 ## Documentation Resources
 
-[Detailed bibliography](bibliography.md)
+[Detailed bibliography of SDKs' documentations](bibliography.md)

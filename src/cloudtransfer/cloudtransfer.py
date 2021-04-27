@@ -1,22 +1,24 @@
+from _typeshed import ReadableBuffer
 import logging
 import boto3
 import json
 import dropbox
 import sys
 from botocore.exceptions import ClientError
+from dropbox import files
 from dropbox.files import WriteMode
 from dropbox.exceptions import ApiError, AuthError
 
 LOGGING_FORMAT = '%(levelname)s: %(asctime)s: %(message)s'
 
 # Add OAuth2 access token here.
-# You can generate one for yourself in the App Console.
-# See https://blogs.dropbox.com/developers/2014/05
 TOKEN = ''
 
+# You can generate one for yourself in the App Console.
+# See https://dropbox.tech/developers/generate-an-access-token-for-your-own-account
 
-LOCALFILE = 'my-file.txt'
-BACKUPPATH = '/my-file-backup.txt'
+LOCALFILE = 'my-file.txt' # The file to backup
+BACKUPPATH = '/my-file-backup.txt' # The cloud destination
 
 
 # Uploads contents of LOCALFILE to Dropbox
@@ -47,7 +49,7 @@ def backup():
 
 # Change the text string in LOCALFILE to be new_content
 # @param new_content is a string
-def change_local_file(new_content):
+def change_local_file(new_content:ReadableBuffer):
     print("Changing contents of " + LOCALFILE + " on local machine…")
     with open(LOCALFILE, 'wb') as f:
         f.write(new_content)
@@ -72,20 +74,28 @@ def restore(rev=None):
 
 # Look at all of the available revisions on Dropbox, and return the oldest one
 def select_revision():
+    """Look at all of the available revisions on Dropbox, and return the oldest one
+
+    Returns:
+        [type]: [description]
+    """    
     with dropbox.Dropbox(TOKEN) as dbx:
         # Get the revisions for file
         #   and sort by datetime object, "server_modified"
         print("Finding available revisions on Dropbox…")
-        entries = dbx.files_list_revisions(BACKUPPATH, limit=30).entries
-        revisions = sorted(entries, key=lambda entry: entry.server_modified)
+        revision_result = dbx.files_list_revisions(BACKUPPATH, limit=30)
+        if isinstance(revision_result,files.ListRevisionsResult):
+            revision_result = revision_result.entries
+            revisions = sorted(revision_result, key=lambda entry: entry.server_modified)
 
-        for revision in revisions:
-            print(revision.rev, revision.server_modified)
+            for revision in revisions:
+                print(revision.rev, revision.server_modified)
 
-        # Return oldest revision
-        #   first entry, ∵ revisions sorted oldest:newest
-        return revisions[0].rev
-
+            # Return oldest revision
+            #   first entry, ∵ revisions sorted oldest:newest
+            return revisions[0].rev
+        else:
+            return None
 
 def test_backup_and_restore():
     # Check for an access token

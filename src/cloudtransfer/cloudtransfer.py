@@ -8,6 +8,50 @@ from botocore.exceptions import ClientError
 from dropbox import files
 from dropbox.files import WriteMode
 from dropbox.exceptions import ApiError, AuthError
+from botocore.config import Config
+
+proxy_definitions = {
+    'http': 'http://proxy.amazon.com:6502',
+    'https': 'https://proxy.amazon.org:2010'
+}
+
+s3 = {
+    'use_accelerate_endpoint': False, # Refers to whether to use the S3 Accelerate endpoint. The value must be a boolean. If True, the client will use the S3 Accelerate endpoint. If the S3 Accelerate endpoint is being used then the addressing style will always be virtual.
+    
+}
+
+# See Config reference https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html
+
+"""
+This option is for configuring client-specific configurations that affect the behavior of your specific client object only. As described earlier, there are options used here that will supersede those found in other configuration locations:
+    `region_name` (string) - The AWS Region used in instantiating the client. If used, this takes precedence over environment variable and configuration file values. But it doesn't overwrite a region_name value explicitly passed to individual service methods.
+
+    `signature_version` (string) - The signature version used when signing requests. Note that the default version is Signature Version 4. If you're using a presigned URL with an expiry of greater than 7 days, you should specify Signature Version 2.
+
+    `s3` (related configurations; dictionary) - Amazon S3 service-specific configurations. For more information, see the Botocore config reference.
+
+    `proxies` (dictionary) - Each entry maps a protocol name to the proxy server Boto3 should use to communicate using that protocol. See Specifying proxy servers for more information.
+
+    `proxies_config` (dictionary) - Additional proxy configuration settings. For more information, see Configuring proxies.
+
+    `retries` (dictionary) - Client retry behavior configuration options that include retry mode and maximum retry attempts. For more information, see the Retries guide.
+
+For more information about additional options, or for a complete list of options, see the Config reference.
+
+To set these configuration options, create a Config object with the options you want, and then pass them into your client.
+"""
+
+my_aws_config = Config(
+    region_name = 'us-west-2',
+    signature_version = 'v4',
+    retries = {
+        'max_attempts': 10,
+        'mode': 'standard'
+    },
+    proxies = proxy_definitions
+)
+
+aws_client = boto3.client('kinesis', config=my_aws_config)
 
 LOGGING_FORMAT = '%(levelname)s: %(asctime)s: %(message)s'
 

@@ -1,4 +1,11 @@
-# Cloud Storage Tranfer
+---
+layout: default
+title: Cloud Storage Transfer
+nav_exclude: true
+has_toc: true
+has_children: true
+---
+# Cloud Storage Transfer
 
 A Python toolchain to enable transfer of backed-up files between various cloud stores.
 ![Python Silly Walks will transfer your data](CloudStorageTransfer.jpg)

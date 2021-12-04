@@ -1,3 +1,10 @@
+---
+layout: default
+title: Referenced Documentation for Cloud Storage Python API's
+has_toc: false
+has_children: false
+parent: Cloud Storage Transfer
+---
 # Bibliography in Detail
 
 * [Dropbox Python SDK](https://github.com/dropbox/dropbox-sdk-python)

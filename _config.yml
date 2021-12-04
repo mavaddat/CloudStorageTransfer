@@ -1,1 +1,18 @@
-theme: jekyll-theme-architect
+title: Cloud Storage Transfer 
+description: Toolchain written in Python for enabling transfer of files between cloud storage providers.
+
+timezone: America/Vancouver
+
+exclude: ["vendor/", "node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile","normalize.scss.md"]
+
+remote_theme: pmarsceill/just-the-docs
+
+color_scheme: dark
+
+# Aux links for the upper right navigation
+aux_links:
+  "Cloud Storage Transfer":
+    - "//github.com/mavaddat/CloudStorageTransfer"
+
+# Makes Aux links open in a new tab. Default is false
+aux_links_new_tab: false

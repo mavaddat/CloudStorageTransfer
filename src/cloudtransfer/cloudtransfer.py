@@ -4,11 +4,14 @@ import boto3
 import json
 import dropbox
 import sys
+import os
+import configparser
 from botocore.exceptions import ClientError
 from dropbox import files
 from dropbox.files import WriteMode
 from dropbox.exceptions import ApiError, AuthError
 from botocore.config import Config
+
 
 proxy_definitions = {
     'http': 'http://proxy.amazon.com:6502',
@@ -16,42 +19,42 @@ proxy_definitions = {
 }
 
 s3 = {
-    'use_accelerate_endpoint': False, # Refers to whether to use the S3 Accelerate endpoint. The value must be a boolean. If True, the client will use the S3 Accelerate endpoint. If the S3 Accelerate endpoint is being used then the addressing style will always be virtual.
-    
+    'use_accelerate_endpoint': False,  # Refers to whether to use the S3
+    # Accelerate endpoint. The value must be a boolean. If True, the client
+    # will use the S3 Accelerate endpoint. If the S3 Accelerate endpoint is
+    # being used then the addressing style will always be virtual.
 }
 
-# See Config reference https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html
 
-"""
-This option is for configuring client-specific configurations that affect the behavior of your specific client object only. As described earlier, there are options used here that will supersede those found in other configuration locations:
-    `region_name` (string) - The AWS Region used in instantiating the client. If used, this takes precedence over environment variable and configuration file values. But it doesn't overwrite a region_name value explicitly passed to individual service methods.
+# See botocore config reference:
+# https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html
 
-    `signature_version` (string) - The signature version used when signing requests. Note that the default version is Signature Version 4. If you're using a presigned URL with an expiry of greater than 7 days, you should specify Signature Version 2.
+# Try first to read region from ~/.aws/config
+# If not found, try to read from environment variable
+# If not found, use default region
+def get_region() -> str:
+    config = configparser.ConfigParser()
+    config.read(os.path.expanduser('~') + '/.aws/config')
+    if config.has_option('default', 'region'):
+        return config.get('default', 'region')
+    else:
+        return os.environ.get('AWS_DEFAULT_REGION')
 
-    `s3` (related configurations; dictionary) - Amazon S3 service-specific configurations. For more information, see the Botocore config reference.
+# https://docs.aws.amazon.com/sdkref/latest/guide/settings-global.html
 
-    `proxies` (dictionary) - Each entry maps a protocol name to the proxy server Boto3 should use to communicate using that protocol. See Specifying proxy servers for more information.
-
-    `proxies_config` (dictionary) - Additional proxy configuration settings. For more information, see Configuring proxies.
-
-    `retries` (dictionary) - Client retry behavior configuration options that include retry mode and maximum retry attempts. For more information, see the Retries guide.
-
-For more information about additional options, or for a complete list of options, see the Config reference.
-
-To set these configuration options, create a Config object with the options you want, and then pass them into your client.
-"""
 
 my_aws_config = Config(
-    region_name = 'us-west-2',
-    signature_version = 'v4',
-    retries = {
+    region_name=get_region(),
+    signature_version='v4',  # Sign requests w AWS access key, which
+    # consists of an access key ID and secret access key.
+    retries={
         'max_attempts': 10,
-        'mode': 'standard'
+        'mode': 'standard'  # legacy, standard, adaptive
     },
-    proxies = proxy_definitions
+    proxies=proxy_definitions
 )
 
-aws_client = boto3.client('kinesis', config=my_aws_config)
+aws_client = boto3.client('s3', config=my_aws_config)
 
 LOGGING_FORMAT = '%(levelname)s: %(asctime)s: %(message)s'
 
@@ -59,10 +62,11 @@ LOGGING_FORMAT = '%(levelname)s: %(asctime)s: %(message)s'
 TOKEN = ''
 
 # You can generate one for yourself in the App Console.
-# See https://dropbox.tech/developers/generate-an-access-token-for-your-own-account
+# See
+# https://dropbox.tech/developers/generate-an-access-token-for-your-own-account
 
-LOCALFILE = 'my-file.txt' # The file to backup
-BACKUPPATH = '/my-file-backup.txt' # The cloud destination
+LOCALFILE = 'my-file.txt'  # The file to backup
+BACKUPPATH = '/my-file-backup.txt'  # The cloud destination
 
 
 # Uploads contents of LOCALFILE to Dropbox
@@ -93,7 +97,7 @@ def backup():
 
 # Change the text string in LOCALFILE to be new_content
 # @param new_content is a string
-def change_local_file(new_content:ReadableBuffer):
+def change_local_file(new_content: ReadableBuffer):
     print("Changing contents of " + LOCALFILE + " on local machine…")
     with open(LOCALFILE, 'wb') as f:
         f.write(new_content)
@@ -122,15 +126,18 @@ def select_revision():
 
     Returns:
         [type]: [description]
-    """    
+    """
     with dropbox.Dropbox(TOKEN) as dbx:
         # Get the revisions for file
         #   and sort by datetime object, "server_modified"
         print("Finding available revisions on Dropbox…")
         revision_result = dbx.files_list_revisions(BACKUPPATH, limit=30)
-        if isinstance(revision_result,files.ListRevisionsResult):
+        if isinstance(revision_result, files.ListRevisionsResult):
             revision_result = revision_result.entries
-            revisions = sorted(revision_result, key=lambda entry: entry.server_modified)
+            revisions = sorted(
+                revision_result,
+                key=lambda entry: entry.server_modified
+            )
 
             for revision in revisions:
                 print(revision.rev, revision.server_modified)
@@ -140,6 +147,7 @@ def select_revision():
             return revisions[0].rev
         else:
             return None
+
 
 def test_backup_and_restore():
     # Check for an access token
